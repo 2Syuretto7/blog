@@ -1,21 +1,28 @@
 ---
 layout: default
 ---
-<header class="mast">
-  <h1 class="idle" aria-label="blog">blog</h1>
-  <p class="tag idle">Everything here is being forgotten. Reading is the only repair.</p>
-</header>
+<section class="surface">
+  <h1>blog</h1>
+  <p class="tag">Everything written here sinks. Go down after it.</p>
+  <svg class="waterline" viewBox="0 0 1200 40" preserveAspectRatio="none" aria-hidden="true"><path id="wave" d="M0 20 Q 75 8 150 20 T 300 20 T 450 20 T 600 20 T 750 20 T 900 20 T 1050 20 T 1200 20 V 40 H 0 Z"/></svg>
+</section>
+<section class="shaft" id="shaft" aria-label="Writing, deepest last">
 {% if site.posts.size > 0 %}
-<ol class="index" reversed>
-{% for post in site.posts %}
-  <li class="entry" data-url="{{ post.url | relative_url }}" data-born="{{ post.date | date_to_xmlschema }}">
-    <a href="{{ post.url | relative_url }}">
-      <span class="t erode">{{ post.title }}</span>
-      <span class="meta"><time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%-d %B %Y" }}</time><span class="lost"></span></span>
-    </a>
-  </li>
-{% endfor %}
-</ol>
+  <ol class="sunk" reversed>
+  {% for post in site.posts %}
+    <li class="wreck" data-born="{{ post.date | date_to_xmlschema }}">
+      <a href="{{ post.url | relative_url }}">
+        <span class="t">{{ post.title }}</span>
+        <span class="meta"><span class="at"></span><time datetime="{{ post.date | date_to_xmlschema }}">written {{ post.date | date: "%-d %B %Y" }}</time></span>
+      </a>
+    </li>
+  {% endfor %}
+  </ol>
 {% else %}
-<p class="empty">Nothing has been written yet, so nothing can be forgotten.</p>
+  <p class="empty">Nothing has been written yet, so nothing has sunk.</p>
 {% endif %}
+  <div class="floor" id="floor">
+    <p class="floor-depth">10,935 m</p>
+    <p>The floor of the Challenger Deep, the deepest point in any ocean. Nothing written here has sunk this far yet.</p>
+  </div>
+</section>

@@ -1,0 +1,169 @@
+:root {
+  --water: rgb(8, 24, 48);
+  --ink: #0b2140;
+  --soft: rgba(11, 33, 64, .66);
+  --lure: #0e7d73;
+  --gutter: clamp(16px, 4vw, 56px);
+}
+:root.dark {
+  --ink: #d4eef1;
+  --soft: rgba(212, 238, 241, .62);
+  --lure: #7ff5d6;
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--water);
+  color: var(--ink);
+  font-family: "Source Serif 4", Georgia, serif;
+  font-size: clamp(18px, 0.8vw + 13px, 21px);
+  line-height: 1.65;
+  transition: color .6s ease;
+}
+html:not(.js) body { background: #08182f; color: #d4eef1; }
+::selection { background: var(--lure); color: #021014; }
+a { color: inherit; }
+a:focus-visible { outline: 2px solid var(--lure); outline-offset: 4px; }
+
+#snow { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+.page, .foot { position: relative; z-index: 1; }
+
+/* The gauge. */
+.gauge {
+  position: fixed; z-index: 3;
+  top: var(--gutter); right: var(--gutter);
+  display: flex; flex-direction: column; align-items: flex-end;
+  font-family: "Instrument Sans", system-ui, sans-serif;
+  text-align: right;
+  pointer-events: none;
+}
+.gauge .zone { font-size: 13px; font-weight: 600; color: var(--lure); }
+.gauge .depth { font-size: clamp(40px, 5.4vw, 76px); line-height: 1; letter-spacing: -0.03em; font-variant-numeric: tabular-nums; margin: 4px 0 6px; }
+.gauge .depth small { font-size: .32em; letter-spacing: 0; margin-left: 4px; color: var(--soft); }
+.gauge .sub { font-size: 13px; color: var(--soft); font-variant-numeric: tabular-nums; }
+html:not(.js) .gauge { display: none; }
+
+/* Home: above the water. */
+.is-home .page { max-width: none; padding: 0; }
+.surface {
+  position: relative;
+  min-height: 100svh;
+  display: flex; flex-direction: column; justify-content: center;
+  padding: var(--gutter);
+  padding-bottom: 18vh;
+}
+.surface h1 {
+  margin: 0 0 0 -0.03em;
+  font-family: "Instrument Serif", serif;
+  font-weight: 400;
+  font-size: clamp(120px, 30vw, 330px);
+  line-height: .78;
+  letter-spacing: -0.04em;
+}
+.surface .tag {
+  margin: .7em 0 0;
+  max-width: 22ch;
+  font-family: "Instrument Serif", serif;
+  font-style: italic;
+  font-size: clamp(24px, 2.6vw, 34px);
+  line-height: 1.15;
+}
+.waterline { position: absolute; left: 0; right: 0; bottom: 0; width: 100%; height: 40px; }
+.waterline path { fill: rgb(150, 214, 224); }
+
+/* Home: the shaft. */
+.shaft { position: relative; min-height: 60vh; padding: 0 var(--gutter); }
+.sunk { list-style: none; margin: 0; padding: 0; }
+html.js .wreck { position: absolute; left: var(--gutter); right: var(--gutter); }
+html:not(.js) .wreck { margin: 3em 0; }
+.wreck a {
+  display: block;
+  max-width: 34rem;
+  text-decoration: none;
+  margin-left: clamp(0px, 14vw, 220px);
+}
+.wreck .t {
+  display: block;
+  font-family: "Instrument Serif", serif;
+  font-size: clamp(38px, 5.6vw, 72px);
+  line-height: 1;
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+}
+.wreck .meta { display: block; margin-top: .55em; font-family: "Instrument Sans", sans-serif; font-size: 13px; color: var(--soft); }
+.wreck .meta .at { color: var(--lure); font-weight: 600; margin-right: .8em; }
+.wreck.glow .t { color: #e6fbf7; text-shadow: 0 0 22px rgba(127, 245, 214, .55), 0 0 2px rgba(127, 245, 214, .6); }
+.wreck a:hover .t, .wreck a:focus-visible .t { color: var(--lure); }
+.empty { padding-top: 30vh; text-align: center; font-style: italic; color: var(--soft); }
+
+html.js .floor { position: absolute; left: var(--gutter); right: var(--gutter); }
+.floor { text-align: center; max-width: 30rem; margin: 0 auto; font-family: "Instrument Sans", sans-serif; font-size: 15px; color: var(--soft); }
+.floor-depth { margin: 0 0 .4em; font-family: "Instrument Serif", serif; font-size: 44px; color: var(--ink); }
+
+/* A post. */
+.is-post .page { max-width: 42rem; margin: 0 auto; padding: clamp(40px, 9vh, 110px) var(--gutter) 40px; }
+.up {
+  display: inline-block;
+  font-family: "Instrument Sans", sans-serif;
+  font-size: 14px; font-weight: 600;
+  text-decoration: none;
+  color: var(--lure);
+  margin-bottom: 2.4em;
+}
+.up:hover { text-decoration: underline; }
+.post-title {
+  margin: 0;
+  max-width: 13ch;
+  font-family: "Instrument Serif", serif;
+  font-weight: 400;
+  font-size: clamp(48px, 8vw, 92px);
+  line-height: .98;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+:root.dark .post-title { text-shadow: 0 0 26px rgba(127, 245, 214, .35); }
+.post .meta { margin: 1em 0 2.6em; font-family: "Instrument Sans", sans-serif; font-size: 13px; color: var(--soft); }
+.post .meta .at { color: var(--lure); font-weight: 600; margin-right: .8em; }
+html.js .post .prose, html.js .post .turn { opacity: 0; transform: translateY(24px); transition: opacity 1.2s ease, transform 1.4s cubic-bezier(.2,.8,.2,1); }
+html.js .post.arrived .prose, html.js .post.arrived .turn { opacity: 1; transform: none; }
+
+.prose > * { margin: 0 0 1.05em; }
+.prose h2, .prose h3 { font-family: "Instrument Serif", serif; font-weight: 400; line-height: 1.1; margin: 1.9em 0 .5em; }
+.prose h2 { font-size: 1.9em; }
+.prose h3 { font-size: 1.45em; }
+.prose a { text-decoration-color: var(--lure); text-underline-offset: .18em; }
+.prose a:hover { color: var(--lure); }
+.prose blockquote { margin: 1.6em 0; padding-left: 1.1em; border-left: 2px solid var(--lure); font-style: italic; }
+.prose img { max-width: 100%; height: auto; display: block; margin: 2em auto; }
+.prose hr { border: 0; border-top: 1px solid var(--soft); opacity: .4; margin: 2.6em 0; }
+.prose code { font-size: .86em; background: rgba(127, 245, 214, .12); padding: .05em .3em; border-radius: 3px; }
+.prose pre { background: rgba(0, 0, 0, .3); padding: 1em; overflow-x: auto; font-size: .78em; line-height: 1.5; }
+.prose pre code { background: none; padding: 0; }
+
+.turn { display: flex; justify-content: space-between; gap: 1.5em; margin-top: 4em; padding-top: 1.2em; border-top: 1px solid var(--soft); }
+.turn a { text-decoration: none; font-family: "Instrument Serif", serif; font-size: 1.25em; line-height: 1.15; max-width: 48%; }
+.turn a:hover { color: var(--lure); }
+.turn small { display: block; font-family: "Instrument Sans", sans-serif; font-size: 12px; font-weight: 600; color: var(--lure); margin-bottom: .3em; }
+.turn .deeper { text-align: right; margin-left: auto; }
+
+.foot {
+  display: flex; gap: 1.4em; flex-wrap: wrap;
+  padding: 3em var(--gutter) 48px;
+  font-family: "Instrument Sans", sans-serif;
+  font-size: 14px;
+  color: var(--soft);
+}
+.is-post .foot { max-width: 42rem; margin: 0 auto; }
+.is-home .foot { justify-content: center; }
+.foot a { text-decoration: none; }
+.foot a:hover { color: var(--lure); }
+
+@media (max-width: 640px) {
+  .gauge .depth { font-size: 34px; }
+  .gauge .sub { font-size: 11px; }
+  .surface h1 { margin-top: 18vh; }
+  .wreck a { margin-left: 0; }
+  .post-title { margin-top: 64px; }
+}
+@media (prefers-reduced-motion: reduce) { body { transition: none; } html.js .post .prose, html.js .post .turn { transition: none; } }

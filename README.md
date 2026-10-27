@@ -1,5 +1,5 @@
 # blog.arnavraja.in
-Every post erodes a little more for each day since it was last read to the end; reading a passage restores it.
+Every post sinks 18 metres a day from the moment it is written. The homepage is a dive from the surface to the floor of the Challenger Deep; each post sits at the depth it has reached.
 
 To publish: add a file to `_posts/` named `YYYY-MM-DD-some-title.md`:
 
