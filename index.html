@@ -1,20 +1,21 @@
 ---
 layout: default
 ---
-<header class="home-head">
-  <h1 class="mast-big" aria-label="blog"><span>b</span><span>l</span><span>o</span><span>g</span></h1>
-  <p class="tag">{{ site.description }}</p>
-  <p class="lamp-hint">Move slowly. Something is written on the other side.</p>
+<header class="mast">
+  <h1 class="idle" aria-label="blog">blog</h1>
+  <p class="tag idle">Everything here is being forgotten. Reading is the only repair.</p>
 </header>
+{% if site.posts.size > 0 %}
 <ol class="index" reversed>
 {% for post in site.posts %}
-  <li>
+  <li class="entry" data-url="{{ post.url | relative_url }}" data-born="{{ post.date | date_to_xmlschema }}">
     <a href="{{ post.url | relative_url }}">
-      <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%b %Y" }}</time>
-      <span class="t">{{ post.title }}</span>
-      <span class="ex">{{ post.excerpt | strip_html | strip_newlines | truncate: 140 }}</span>
+      <span class="t erode">{{ post.title }}</span>
+      <span class="meta"><time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%-d %B %Y" }}</time><span class="lost"></span></span>
     </a>
   </li>
 {% endfor %}
 </ol>
-{% if site.posts.size == 0 %}<p class="empty">The page is blank. It will not stay that way.</p>{% endif %}
+{% else %}
+<p class="empty">Nothing has been written yet, so nothing can be forgotten.</p>
+{% endif %}

@@ -1,4 +1,6 @@
 # blog.arnavraja.in
+Every post erodes a little more for each day since it was last read to the end; reading a passage restores it.
+
 To publish: add a file to `_posts/` named `YYYY-MM-DD-some-title.md`:
 
     ---

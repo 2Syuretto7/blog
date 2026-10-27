@@ -1,16 +1,16 @@
 ---
 layout: default
 ---
-<header class="post-head">
-  <a class="mast" href="{{ '/' | relative_url }}">blog</a>
-  <h1 class="post-title">{{ page.title }}</h1>
-  <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%-d %B %Y" }}</time>
-</header>
-<article class="prose">
+<article class="post" data-url="{{ page.url | relative_url }}" data-born="{{ page.date | date_to_xmlschema }}">
+  <a class="home" href="{{ '/' | relative_url }}">blog</a>
+  <h1 class="post-title erode">{{ page.title }}</h1>
+  <p class="meta"><time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%-d %B %Y" }}</time><span class="lost"></span></p>
+  <div class="prose">
 {{ content }}
+  </div>
+  <p class="coda" hidden>You read all of it, so all of it came back. From this moment it begins to forget again.</p>
+  <nav class="turn" aria-label="More writing">
+    {% if page.previous %}<a href="{{ page.previous.url | relative_url }}"><small>written before</small>{{ page.previous.title }}</a>{% else %}<span></span>{% endif %}
+    {% if page.next %}<a class="later" href="{{ page.next.url | relative_url }}"><small>written after</small>{{ page.next.title }}</a>{% endif %}
+  </nav>
 </article>
-<nav class="turn" aria-label="More writing">
-  {% if page.previous %}<a href="{{ page.previous.url | relative_url }}"><small>before this</small>{{ page.previous.title }}</a>{% else %}<span></span>{% endif %}
-  {% if page.next %}<a class="later" href="{{ page.next.url | relative_url }}"><small>after this</small>{{ page.next.title }}</a>{% endif %}
-</nav>
-<div class="inkline" aria-hidden="true"><i></i></div>
