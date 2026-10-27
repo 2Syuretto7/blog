@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% if page.title %}{{ page.title }} / {% endif %}blog / arnav raja</title>
+<meta name="description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 150 }}{% else %}{{ site.description }}{% endif %}">
+<meta name="theme-color" content="#e4e8e1">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23e4e8e1'/%3E%3Ctext x='16' y='25' font-family='Georgia' font-size='26' text-anchor='middle' fill='%2314302b' transform='scale(-1 1) translate(-32 0)'%3Ea%3C/text%3E%3Ccircle cx='24' cy='9' r='3' fill='%238c1d2c'/%3E%3C/svg%3E">
+<link rel="alternate" type="application/atom+xml" title="blog" href="{{ '/feed.xml' | relative_url }}">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,100..900,0..100,0..1;1,9..144,100..900,0..100,0..1&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ '/assets/blog.css' | relative_url }}">
+</head>
+<body class="{{ page.layout }}">
+<div class="underside" aria-hidden="true"><div class="underside-text">{% if page.layout == "post" %}{{ content | strip_html }}{% else %}{% for p in site.posts limit: 12 %}{{ p.content | strip_html }} {% endfor %}{% endif %}</div></div>
+<div class="page">
+{{ content }}
+<footer class="foot">
+  <a href="https://arnavraja.in">arnavraja.in</a>
+  <a href="https://stuff.arnavraja.in">stuff</a>
+  <a href="{{ '/feed.xml' | relative_url }}">feed</a>
+</footer>
+</div>
+<script src="{{ '/assets/lamp.js' | relative_url }}" defer></script>
+</body>
+</html>

@@ -1,0 +1,8 @@
+title: blog
+description: Sentences in the process of becoming true.
+url: https://blog.arnavraja.in
+author: Arnav Raja
+permalink: /:year/:month/:day/:title/
+markdown: kramdown
+exclude:
+  - README.md

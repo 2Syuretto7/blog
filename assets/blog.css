@@ -1,0 +1,221 @@
+:root {
+  --paper: #e4e8e1;
+  --paper-2: #d7ddd3;
+  --ink: #14302b;
+  --ink-soft: #4f625c;
+  --blood: #8c1d2c;
+  --ghost: rgba(140, 29, 44, 0.16);
+  --lx: 50vw;
+  --ly: 40vh;
+  --lr: 0px;
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Newsreader", Georgia, serif;
+  font-size: clamp(18px, 1.2vw + 12px, 21px);
+  line-height: 1.6;
+  font-optical-sizing: auto;
+}
+::selection { background: var(--blood); color: var(--paper); }
+a { color: inherit; }
+a:focus-visible { outline: 2px solid var(--blood); outline-offset: 4px; }
+
+/* The underside: the page's own words, seen through the paper, backwards. */
+.underside {
+  position: fixed; inset: -4vh -4vw;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+  -webkit-mask-image: radial-gradient(circle var(--lr) at var(--lx) var(--ly), #000 0%, rgba(0,0,0,.6) 45%, transparent 100%);
+          mask-image: radial-gradient(circle var(--lr) at var(--lx) var(--ly), #000 0%, rgba(0,0,0,.6) 45%, transparent 100%);
+}
+.underside-text {
+  transform: scaleX(-1) rotate(-1.2deg);
+  font-family: "Fraunces", serif;
+  font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  font-style: italic;
+  font-weight: 300;
+  font-size: clamp(42px, 5.5vw, 84px);
+  line-height: 1.02;
+  color: var(--ghost);
+  word-break: break-word;
+  padding: 2vh 2vw;
+}
+
+.page {
+  position: relative; z-index: 1;
+  max-width: 40rem;
+  margin: 0 auto;
+  padding: clamp(32px, 8vh, 96px) 16px 48px;
+}
+
+/* Home */
+.mast-big {
+  margin: 0 0 .1em -0.05em;
+  font-family: "Fraunces", serif;
+  font-weight: 900;
+  font-size: clamp(96px, 26vw, 220px);
+  line-height: .82;
+  letter-spacing: -0.04em;
+  font-variation-settings: "opsz" 144, "SOFT" 0, "WONK" 0;
+}
+.mast-big span {
+  display: inline-block;
+  transition: font-variation-settings 1.4s cubic-bezier(.2,.8,.2,1), transform 1.4s cubic-bezier(.2,.8,.2,1), font-weight 1.4s;
+}
+.mast-big:hover span { font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1; font-style: italic; }
+.mast-big:hover span:nth-child(1) { transform: translateY(-.06em) rotate(-4deg); }
+.mast-big:hover span:nth-child(2) { transform: translateY(.04em) rotate(3deg); font-weight: 200; }
+.mast-big:hover span:nth-child(3) { transform: translateY(-.02em) scaleX(-1); }
+.mast-big:hover span:nth-child(4) { transform: translateY(.07em) rotate(6deg); }
+.tag {
+  margin: 0;
+  font-style: italic;
+  font-size: 1.15em;
+  color: var(--ink-soft);
+}
+.lamp-hint {
+  margin: 2.2em 0 0;
+  font-size: .78em;
+  color: var(--blood);
+}
+@media (hover: none) { .lamp-hint { display: none; } }
+
+.index {
+  list-style: none;
+  margin: 3.5em 0 0;
+  padding: 0;
+  border-top: 1px solid var(--ink);
+}
+.index li { border-bottom: 1px solid var(--paper-2); }
+.index a {
+  display: grid;
+  grid-template-columns: 5.2em 1fr;
+  column-gap: 1em;
+  padding: 1.05em 0;
+  text-decoration: none;
+}
+.index time {
+  grid-row: span 2;
+  font-size: .78em;
+  color: var(--ink-soft);
+  padding-top: .45em;
+  font-variant-numeric: tabular-nums;
+}
+.index .t {
+  font-family: "Fraunces", serif;
+  font-size: 1.55em;
+  line-height: 1.15;
+  font-weight: 560;
+  font-variation-settings: "opsz" 60, "SOFT" 0, "WONK" 0;
+  transition: font-variation-settings .8s cubic-bezier(.2,.8,.2,1), color .3s, letter-spacing .8s cubic-bezier(.2,.8,.2,1);
+}
+.index .ex { font-size: .86em; color: var(--ink-soft); margin-top: .3em; }
+.index a:hover .t, .index a:focus-visible .t {
+  color: var(--blood);
+  font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  letter-spacing: .01em;
+  font-style: italic;
+}
+.empty { margin-top: 3em; font-style: italic; color: var(--ink-soft); }
+
+/* Post */
+.post-head { margin-bottom: 2.6em; }
+.mast {
+  display: inline-block;
+  font-family: "Fraunces", serif;
+  font-weight: 900;
+  font-size: 1.4em;
+  letter-spacing: -0.03em;
+  text-decoration: none;
+  margin-bottom: 1.6em;
+  transition: transform .6s cubic-bezier(.2,.8,.2,1);
+}
+.mast:hover { transform: scaleX(-1); color: var(--blood); }
+.post-title {
+  margin: 0;
+  font-family: "Fraunces", serif;
+  font-weight: 700;
+  font-size: clamp(40px, 7vw, 68px);
+  line-height: 1.02;
+  letter-spacing: -0.025em;
+  font-variation-settings: "opsz" 144, "SOFT" 50, "WONK" 1;
+  text-wrap: balance;
+}
+.post-head time { display: block; margin-top: .8em; font-size: .8em; color: var(--ink-soft); }
+
+.prose { hyphens: auto; }
+.prose > * { margin: 0 0 1.1em; }
+.prose h2, .prose h3 {
+  font-family: "Fraunces", serif;
+  font-variation-settings: "opsz" 72, "SOFT" 30;
+  line-height: 1.15;
+  margin: 2em 0 .6em;
+}
+.prose h2 { font-size: 1.6em; }
+.prose h3 { font-size: 1.25em; }
+.prose a { text-decoration-color: var(--blood); text-underline-offset: .18em; text-decoration-thickness: 1px; }
+.prose a:hover { color: var(--blood); }
+.prose blockquote {
+  margin: 1.6em 0;
+  padding: 0 0 0 1.1em;
+  border-left: 3px solid var(--blood);
+  font-style: italic;
+  color: var(--ink-soft);
+}
+.prose img { max-width: 100%; height: auto; display: block; margin: 2em auto; }
+.prose hr { border: 0; text-align: center; margin: 2.4em 0; }
+.prose hr::after { content: "\2042"; color: var(--blood); font-size: 1.3em; }
+.prose code { font-size: .86em; background: var(--paper-2); padding: .08em .3em; border-radius: 3px; }
+.prose pre { background: var(--paper-2); padding: 1em; overflow-x: auto; font-size: .8em; line-height: 1.5; }
+.prose pre code { background: none; padding: 0; }
+.prose > p:first-child::first-letter {
+  font-family: "Fraunces", serif;
+  font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  font-weight: 800;
+  color: var(--blood);
+  float: left;
+  font-size: 3.6em;
+  line-height: .82;
+  margin: .06em .08em 0 0;
+}
+
+.turn {
+  display: flex; justify-content: space-between; gap: 1.5em;
+  margin-top: 4em; padding-top: 1.2em;
+  border-top: 1px solid var(--ink);
+}
+.turn a { text-decoration: none; font-family: "Fraunces", serif; font-size: 1.05em; line-height: 1.25; max-width: 48%; }
+.turn a:hover { color: var(--blood); }
+.turn small { display: block; font-family: "Newsreader", serif; font-size: .72em; color: var(--ink-soft); margin-bottom: .2em; }
+.turn .later { text-align: right; margin-left: auto; }
+
+.inkline { position: fixed; top: 0; bottom: 0; left: 0; width: 3px; z-index: 2; pointer-events: none; }
+.inkline i { display: block; width: 100%; height: 0; background: var(--blood); }
+
+.foot {
+  display: flex; gap: 1.4em; flex-wrap: wrap;
+  margin-top: 5em;
+  font-size: .78em;
+  color: var(--ink-soft);
+}
+.foot a { text-decoration: none; }
+.foot a:hover { color: var(--blood); }
+
+@media (hover: none) {
+  .underside { -webkit-mask-image: none; mask-image: none; opacity: .45; }
+}
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; }
+}
+
+.tag { margin-top: .35em; }
+@media (max-width: 560px) {
+  .tag { margin-top: .6em; }
+  .index a { grid-template-columns: 1fr; }
+  .index time { grid-row: auto; padding-top: 0; }
+}
