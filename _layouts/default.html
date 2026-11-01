@@ -10,8 +10,22 @@
 <link rel="alternate" type="application/atom+xml" title="blog" href="{{ '/feed.xml' | relative_url }}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;600&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;600&family=IBM+Plex+Mono:ital,wght@0,400;0,600;1,400&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{{ '/assets/alto.css' | relative_url }}?v={{ site.time | date: '%s' }}">
+<script>
+  // Typeset maths in whichever form kramdown leaves it: \( \) and \[ \] text, or kdmath elements holding $ or $$.
+  window.renderWriting = function (root) {
+    if (!window.katex) return;
+    root.querySelectorAll(".kdmath").forEach(function (el) {
+      var tex = el.textContent.trim().replace(/^\$\$?|\$\$?$/g, "");
+      try { katex.render(tex, el, { displayMode: el.tagName === "DIV", throwOnError: false }); } catch (e) {}
+    });
+    if (window.renderMathInElement) renderMathInElement(root, { delimiters: [{ left: "$$", right: "$$", display: true }, { left: "\\[", right: "\\]", display: true }, { left: "\\(", right: "\\)", display: false }], ignoredTags: ["script", "noscript", "style", "textarea", "pre", "code"], throwOnError: false });
+  };
+</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" crossorigin="anonymous" onload="renderWriting(document.body); dispatchEvent(new Event('resize'));"></script>
 </head>
 <body data-key="alto-blog" data-order="desc" data-start="page">
 {{ content }}

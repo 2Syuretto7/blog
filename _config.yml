@@ -4,5 +4,11 @@ url: https://blog.arnavraja.in
 author: Arnav Raja
 permalink: /:year/:month/:day/:title/
 markdown: kramdown
+kramdown:
+  input: GFM
+  math_engine: mathjax
+  syntax_highlighter: rouge
+  hard_wrap: false
+  footnote_backlink: "back"
 exclude:
   - README.md
