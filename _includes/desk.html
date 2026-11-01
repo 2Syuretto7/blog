@@ -1,13 +1,5 @@
 <div class="room">
   <div class="screen" id="screen">
-    <section class="win" data-name="stuff" aria-label="stuff">
-      <h2 class="tab">stuff</h2>
-      <div class="pane">
-        <p class="meta">things, 2026</p>
-        <p class="note">Everything else, as windows on the same upright paper-white screen, after the Xerox Alto, 1973.</p>
-        <a class="go" href="https://stuff.arnavraja.in">stuff.arnavraja.in</a>
-      </div>
-    </section>
     {% for p in site.posts reversed %}
     {% assign here = false %}{% if p.url == include.front %}{% assign here = true %}{% endif %}
     <article class="win doc{% if here %} front{% endif %}" data-name="{{ p.url }}" aria-label="{{ p.title | escape }}">
@@ -20,4 +12,5 @@
     </article>
     {% endfor %}
   </div>
+  <footer class="foot"><a href="https://stuff.arnavraja.in">stuff</a></footer>
 </div>
