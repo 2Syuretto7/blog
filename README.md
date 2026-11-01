@@ -1,5 +1,5 @@
 # blog.arnavraja.in
-The whole blog is one numbered outline, after Douglas Engelbart's NLS (1968). Posts are statements 1, 2, 3; their paragraphs are 1a, 1b... Level 1 shows titles, level 2 first lines, level 3 everything.
+The same upright, paper-white Alto screen as stuff.arnavraja.in. Every post is a document window; a post's own address brings its window to the front.
 
 To publish: add a file to `_posts/` named `YYYY-MM-DD-some-title.md`:
 
@@ -8,4 +8,4 @@ To publish: add a file to `_posts/` named `YYYY-MM-DD-some-title.md`:
     ---
     Your words here.
 
-Commit it (the GitHub website's "Add file" button works) and it is live in about a minute. New posts take the next number at the bottom of the outline.
+Commit it (the GitHub website's "Add file" button works) and it is live in about a minute. The newest post opens on top.

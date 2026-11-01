@@ -1,28 +1,6 @@
 ---
 layout: default
 ---
-<header class="feedback">
-  <h1>blog</h1>
-  <div class="viewspec" role="group" aria-label="How much to show">
-    <span class="label">level</span>
-    <button type="button" data-level="1" aria-pressed="true">1</button>
-    <button type="button" data-level="2" aria-pressed="false">2</button>
-    <button type="button" data-level="3" aria-pressed="false">3</button>
-  </div>
-</header>
-<main class="outline" id="outline">
-{% for post in site.posts reversed %}
-  <section class="branch" data-n="{{ forloop.index }}">
-    <div class="stmt l1"><button type="button" class="num" aria-expanded="false">{{ forloop.index }}</button><span class="text"><span class="title">{{ post.title }}</span> <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%-d %b %Y" }}</time></span></div>
-    <div class="kids">{{ post.content }}</div>
-    <p class="alone"><a href="{{ post.url | relative_url }}">Statement {{ forloop.index }} on its own page</a></p>
-  </section>
-{% else %}
-  <p class="stmt">Nothing has been written yet.</p>
-{% endfor %}
-</main>
-<footer class="foot">
-  <a href="https://arnavraja.in">arnavraja.in</a>
-  <a href="https://stuff.arnavraja.in">stuff</a>
-  <a href="{{ '/feed.xml' | relative_url }}">feed</a>
-</footer>
+<h1 class="sr">blog, by Arnav Raja</h1>
+{% assign newest = site.posts.first.url %}
+{% include desk.html front=newest %}

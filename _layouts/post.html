@@ -1,22 +1,4 @@
 ---
 layout: default
 ---
-{% assign num = 1 %}{% for p in site.posts reversed %}{% if p.url == page.url %}{% assign num = forloop.index %}{% endif %}{% endfor %}
-<header class="feedback">
-  <a class="whole" href="{{ '/' | relative_url }}">The whole outline</a>
-</header>
-<main class="outline">
-  <section class="branch open" data-n="{{ num }}">
-    <div class="stmt l1"><span class="num">{{ num }}</span><h1 class="text"><span class="title">{{ page.title }}</span> <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%-d %b %Y" }}</time></h1></div>
-    <div class="kids">{{ content }}</div>
-  </section>
-</main>
-<nav class="turn" aria-label="Neighbouring statements">
-  {% if page.previous %}<a href="{{ page.previous.url | relative_url }}">Statement {{ num | minus: 1 }}: {{ page.previous.title }}</a>{% endif %}
-  {% if page.next %}<a href="{{ page.next.url | relative_url }}">Statement {{ num | plus: 1 }}: {{ page.next.title }}</a>{% endif %}
-</nav>
-<footer class="foot">
-  <a href="https://arnavraja.in">arnavraja.in</a>
-  <a href="https://stuff.arnavraja.in">stuff</a>
-  <a href="{{ '/feed.xml' | relative_url }}">feed</a>
-</footer>
+{% include desk.html front=page.url single=true %}

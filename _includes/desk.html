@@ -1,0 +1,15 @@
+<div class="room">
+  <div class="screen" id="screen">
+    {% for p in site.posts reversed %}
+    {% assign here = false %}{% if p.url == include.front %}{% assign here = true %}{% endif %}
+    <article class="win doc{% if here %} front{% endif %}" data-name="{{ p.url }}" aria-label="{{ p.title | escape }}">
+      {% if here %}<h1 class="tab">{{ p.title }}</h1>{% else %}<h2 class="tab">{{ p.title }}</h2>{% endif %}
+      <div class="pane">
+        <p class="meta"><time datetime="{{ p.date | date_to_xmlschema }}">{{ p.date | date: "%-d %B %Y" }}</time></p>
+        <div class="body">{{ p.content | markdownify }}</div>
+        {% unless here and include.single %}<a class="go" href="{{ p.url | relative_url }}">blog.arnavraja.in{{ p.url | relative_url | split: "/" | join: "/" }}</a>{% endunless %}
+      </div>
+    </article>
+    {% endfor %}
+  </div>
+</div>
