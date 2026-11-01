@@ -39,7 +39,6 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--mark); outline-
   padding: 0 9px;
 }
 .viewspec button[aria-pressed="true"] { background: var(--ink); color: var(--screen); border-color: var(--ink); }
-.help { flex-basis: 100%; margin: 0; max-width: 46em; color: var(--dim); }
 .whole { color: var(--dim); }
 .whole:hover { color: var(--ink); }
 
