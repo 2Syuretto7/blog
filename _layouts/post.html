@@ -1,20 +1,22 @@
 ---
 layout: default
 ---
-<article class="post">
-  <a class="back" href="{{ '/' | relative_url }}">Another sentence</a>
-  <h1 class="post-title">{{ page.title }}</h1>
-  <p class="date"><time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%-d %B %Y" }}</time></p>
-  <div class="prose">
-{{ content }}
-  </div>
-  <nav class="turn" aria-label="More writing">
-    {% if page.previous %}<a href="{{ page.previous.url | relative_url }}"><small>earlier</small>{{ page.previous.title }}</a>{% else %}<span></span>{% endif %}
-    {% if page.next %}<a class="later" href="{{ page.next.url | relative_url }}"><small>later</small>{{ page.next.title }}</a>{% endif %}
-  </nav>
-  <footer class="foot">
-    <a href="https://arnavraja.in">arnavraja.in</a>
-    <a href="https://stuff.arnavraja.in">stuff</a>
-    <a href="{{ '/feed.xml' | relative_url }}">feed</a>
-  </footer>
-</article>
+{% assign num = 1 %}{% for p in site.posts reversed %}{% if p.url == page.url %}{% assign num = forloop.index %}{% endif %}{% endfor %}
+<header class="feedback">
+  <a class="whole" href="{{ '/' | relative_url }}">The whole outline</a>
+</header>
+<main class="outline">
+  <section class="branch open" data-n="{{ num }}">
+    <div class="stmt l1"><span class="num">{{ num }}</span><h1 class="text"><span class="title">{{ page.title }}</span> <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%-d %b %Y" }}</time></h1></div>
+    <div class="kids">{{ content }}</div>
+  </section>
+</main>
+<nav class="turn" aria-label="Neighbouring statements">
+  {% if page.previous %}<a href="{{ page.previous.url | relative_url }}">Statement {{ num | minus: 1 }}: {{ page.previous.title }}</a>{% endif %}
+  {% if page.next %}<a href="{{ page.next.url | relative_url }}">Statement {{ num | plus: 1 }}: {{ page.next.title }}</a>{% endif %}
+</nav>
+<footer class="foot">
+  <a href="https://arnavraja.in">arnavraja.in</a>
+  <a href="https://stuff.arnavraja.in">stuff</a>
+  <a href="{{ '/feed.xml' | relative_url }}">feed</a>
+</footer>

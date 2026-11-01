@@ -1,18 +1,29 @@
 ---
 layout: default
 ---
-<h1 class="sr">blog, by Arnav Raja</h1>
-<main class="stage" id="stage">
-  <p class="sentence" id="sentence" aria-live="polite">{% if site.posts.size > 0 %}{{ site.posts.first.content | strip_html | truncatewords: 30 }}{% else %}Nothing has been written yet.{% endif %}</p>
-  <p class="source" id="source">{% if site.posts.size > 0 %}from <a href="{{ site.posts.first.url | relative_url }}">{{ site.posts.first.title }}</a>{% endif %}</p>
+<header class="feedback">
+  <h1>blog</h1>
+  <div class="viewspec" role="group" aria-label="How much to show">
+    <span class="label">level</span>
+    <button type="button" data-level="1" aria-pressed="true">1</button>
+    <button type="button" data-level="2" aria-pressed="false">2</button>
+    <button type="button" data-level="3" aria-pressed="false">3</button>
+  </div>
+  <p class="help">Everything ever written here, as one numbered outline. Level 1 shows only titles, level 2 the first line of everything, level 3 all of it. Press 1, 2 or 3, or a statement's number to open just that branch.</p>
+</header>
+<main class="outline" id="outline">
+{% for post in site.posts reversed %}
+  <section class="branch" data-n="{{ forloop.index }}">
+    <div class="stmt l1"><button type="button" class="num" aria-expanded="false">{{ forloop.index }}</button><span class="text"><span class="title">{{ post.title }}</span> <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%-d %b %Y" }}</time></span></div>
+    <div class="kids">{{ post.content }}</div>
+    <p class="alone"><a href="{{ post.url | relative_url }}">Statement {{ forloop.index }} on its own page</a></p>
+  </section>
+{% else %}
+  <p class="stmt">Nothing has been written yet.</p>
+{% endfor %}
 </main>
-<p class="hint" id="hint">Click anywhere for another sentence.</p>
-<nav class="corner" aria-label="Elsewhere">
+<footer class="foot">
   <a href="https://arnavraja.in">arnavraja.in</a>
   <a href="https://stuff.arnavraja.in">stuff</a>
-</nav>
-<nav class="sr" aria-label="Every piece of writing">
-  <ul>{% for post in site.posts %}<li><a href="{{ post.url | relative_url }}">{{ post.title }}</a></li>{% endfor %}</ul>
-</nav>
-<script>window.WRITING = [{% for post in site.posts %}{"t": {{ post.title | jsonify }}, "u": {{ post.url | relative_url | jsonify }}, "x": {{ post.content | strip_html | jsonify }}}{% unless forloop.last %},{% endunless %}{% endfor %}];</script>
-<script src="{{ '/assets/sentence.js' | relative_url }}?v={{ site.time | date: '%s' }}"></script>
+  <a href="{{ '/feed.xml' | relative_url }}">feed</a>
+</footer>
