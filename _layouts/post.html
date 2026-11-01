@@ -1,15 +1,20 @@
 ---
 layout: default
 ---
-<article class="post" data-born="{{ page.date | date_to_xmlschema }}">
-  <a class="up" href="{{ '/' | relative_url }}">Back to the surface</a>
+<article class="post">
+  <a class="back" href="{{ '/' | relative_url }}">Another sentence</a>
   <h1 class="post-title">{{ page.title }}</h1>
-  <p class="meta"><span class="at"></span><time datetime="{{ page.date | date_to_xmlschema }}">written {{ page.date | date: "%-d %B %Y" }}</time></p>
+  <p class="date"><time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%-d %B %Y" }}</time></p>
   <div class="prose">
 {{ content }}
   </div>
   <nav class="turn" aria-label="More writing">
-    {% if page.next %}<a href="{{ page.next.url | relative_url }}"><small>shallower</small>{{ page.next.title }}</a>{% else %}<span></span>{% endif %}
-    {% if page.previous %}<a class="deeper" href="{{ page.previous.url | relative_url }}"><small>deeper</small>{{ page.previous.title }}</a>{% endif %}
+    {% if page.previous %}<a href="{{ page.previous.url | relative_url }}"><small>earlier</small>{{ page.previous.title }}</a>{% else %}<span></span>{% endif %}
+    {% if page.next %}<a class="later" href="{{ page.next.url | relative_url }}"><small>later</small>{{ page.next.title }}</a>{% endif %}
   </nav>
+  <footer class="foot">
+    <a href="https://arnavraja.in">arnavraja.in</a>
+    <a href="https://stuff.arnavraja.in">stuff</a>
+    <a href="{{ '/feed.xml' | relative_url }}">feed</a>
+  </footer>
 </article>

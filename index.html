@@ -1,28 +1,18 @@
 ---
 layout: default
 ---
-<section class="surface">
-  <h1>blog</h1>
-  <p class="tag">Everything written here sinks. Go down after it.</p>
-  <svg class="waterline" viewBox="0 0 1200 40" preserveAspectRatio="none" aria-hidden="true"><path id="wave" d="M0 20 Q 75 8 150 20 T 300 20 T 450 20 T 600 20 T 750 20 T 900 20 T 1050 20 T 1200 20 V 40 H 0 Z"/></svg>
-</section>
-<section class="shaft" id="shaft" aria-label="Writing, deepest last">
-{% if site.posts.size > 0 %}
-  <ol class="sunk" reversed>
-  {% for post in site.posts %}
-    <li class="wreck" data-born="{{ post.date | date_to_xmlschema }}">
-      <a href="{{ post.url | relative_url }}">
-        <span class="t">{{ post.title }}</span>
-        <span class="meta"><span class="at"></span><time datetime="{{ post.date | date_to_xmlschema }}">written {{ post.date | date: "%-d %B %Y" }}</time></span>
-      </a>
-    </li>
-  {% endfor %}
-  </ol>
-{% else %}
-  <p class="empty">Nothing has been written yet, so nothing has sunk.</p>
-{% endif %}
-  <div class="floor" id="floor">
-    <p class="floor-depth">10,935 m</p>
-    <p>The floor of the Challenger Deep, the deepest point in any ocean. Nothing written here has sunk this far yet.</p>
-  </div>
-</section>
+<h1 class="sr">blog, by Arnav Raja</h1>
+<main class="stage" id="stage">
+  <p class="sentence" id="sentence" aria-live="polite">{% if site.posts.size > 0 %}{{ site.posts.first.content | strip_html | truncatewords: 30 }}{% else %}Nothing has been written yet.{% endif %}</p>
+  <p class="source" id="source">{% if site.posts.size > 0 %}from <a href="{{ site.posts.first.url | relative_url }}">{{ site.posts.first.title }}</a>{% endif %}</p>
+</main>
+<p class="hint" id="hint">Click anywhere for another sentence.</p>
+<nav class="corner" aria-label="Elsewhere">
+  <a href="https://arnavraja.in">arnavraja.in</a>
+  <a href="https://stuff.arnavraja.in">stuff</a>
+</nav>
+<nav class="sr" aria-label="Every piece of writing">
+  <ul>{% for post in site.posts %}<li><a href="{{ post.url | relative_url }}">{{ post.title }}</a></li>{% endfor %}</ul>
+</nav>
+<script>window.WRITING = [{% for post in site.posts %}{"t": {{ post.title | jsonify }}, "u": {{ post.url | relative_url | jsonify }}, "x": {{ post.content | strip_html | jsonify }}}{% unless forloop.last %},{% endunless %}{% endfor %}];</script>
+<script src="{{ '/assets/sentence.js' | relative_url }}?v={{ site.time | date: '%s' }}"></script>

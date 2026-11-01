@@ -1,0 +1,97 @@
+:root { --paper: #fff; --ink: #000; --dim: #6e6e6e; --g: clamp(16px, 3.5vw, 44px); }
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Libre Caslon Text", Georgia, serif;
+}
+a { color: inherit; }
+a:focus-visible { outline: 2px solid var(--ink); outline-offset: 4px; }
+::selection { background: var(--ink); color: var(--paper); }
+::target-text { background: var(--ink); color: var(--paper); }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* Home: one sentence. */
+.is-home { min-height: 100svh; cursor: pointer; overflow: hidden; }
+.stage {
+  position: fixed; inset: 0;
+  display: flex; flex-direction: column; justify-content: center;
+  padding: var(--g);
+  padding-right: max(var(--g), 8vw);
+}
+.sentence {
+  margin: 0;
+  max-width: 100%;
+  font-family: "Libre Caslon Display", serif;
+  font-size: 80px;
+  line-height: 1.04;
+  letter-spacing: -0.01em;
+  text-wrap: pretty;
+  overflow-wrap: normal;
+  transition: opacity .22s ease, filter .22s ease;
+}
+.source {
+  margin: 1.2em 0 0;
+  font-size: clamp(15px, 1.2vw, 18px);
+  font-style: italic;
+  color: var(--dim);
+  transition: opacity .22s ease;
+}
+.source a { color: var(--ink); text-underline-offset: .2em; }
+.turning .sentence { opacity: 0; filter: blur(6px); }
+.turning .source { opacity: 0; }
+.hint, .corner { position: fixed; bottom: var(--g); font-size: 14px; color: var(--dim); }
+.hint { left: var(--g); margin: 0; transition: opacity 1s; }
+.hint.gone { opacity: 0; }
+.corner { right: var(--g); display: flex; gap: 1.2em; cursor: auto; }
+.corner a { text-decoration: none; }
+.corner a:hover { color: var(--ink); text-decoration: underline; }
+
+/* A post: just the writing. */
+.post {
+  max-width: 40rem;
+  margin: 0 auto;
+  padding: clamp(36px, 8vh, 96px) var(--g) 56px;
+  font-size: clamp(18px, 0.8vw + 13px, 21px);
+  line-height: 1.65;
+}
+.back { display: inline-block; font-size: 15px; font-style: italic; color: var(--dim); margin-bottom: 3em; }
+.back:hover { color: var(--ink); }
+.post-title {
+  margin: 0;
+  font-family: "Libre Caslon Display", serif;
+  font-weight: 400;
+  font-size: clamp(44px, 7vw, 84px);
+  line-height: 1.02;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+.date { margin: .8em 0 2.6em; font-size: 14px; color: var(--dim); }
+.prose > * { margin: 0 0 1.05em; }
+.prose h2, .prose h3 { font-family: "Libre Caslon Display", serif; font-weight: 400; line-height: 1.1; margin: 1.9em 0 .5em; }
+.prose h2 { font-size: 1.8em; }
+.prose h3 { font-size: 1.4em; }
+.prose a { text-underline-offset: .18em; }
+.prose blockquote { margin: 1.6em 0; padding-left: 1.1em; border-left: 2px solid var(--ink); font-style: italic; }
+.prose img { max-width: 100%; height: auto; display: block; margin: 2em auto; }
+.prose hr { border: 0; border-top: 1px solid #ddd; margin: 2.6em 0; }
+.prose code { font-size: .86em; background: #f0f0f0; padding: .05em .3em; }
+.prose pre { background: #f0f0f0; padding: 1em; overflow-x: auto; font-size: .78em; line-height: 1.5; }
+.prose pre code { background: none; padding: 0; }
+.turn { display: flex; justify-content: space-between; gap: 1.5em; margin-top: 4em; padding-top: 1.2em; border-top: 1px solid var(--ink); }
+.turn a { text-decoration: none; font-family: "Libre Caslon Display", serif; font-size: 1.25em; line-height: 1.15; max-width: 48%; }
+.turn a:hover { text-decoration: underline; }
+.turn small { display: block; font-family: "Libre Caslon Text", serif; font-style: italic; font-size: 13px; color: var(--dim); margin-bottom: .3em; }
+.turn .later { text-align: right; margin-left: auto; }
+.foot { display: flex; gap: 1.4em; margin-top: 4em; font-size: 14px; color: var(--dim); }
+.foot a { text-decoration: none; }
+.foot a:hover { color: var(--ink); text-decoration: underline; }
+
+@media (max-width: 640px) {
+  .stage { padding-bottom: 90px; }
+  .hint { bottom: calc(var(--g) + 28px); }
+  .corner { left: var(--g); right: auto; }
+}
+@media (prefers-reduced-motion: reduce) { .sentence, .source, .hint { transition: none; } }

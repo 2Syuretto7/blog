@@ -1,5 +1,5 @@
 # blog.arnavraja.in
-Every post sinks 18 metres a day from the moment it is written. The homepage is a dive from the surface to the floor of the Challenger Deep; each post sits at the depth it has reached.
+The front page shows one sentence at a time, drawn at random from every post. Clicking brings another; the title underneath opens the post at that exact sentence.
 
 To publish: add a file to `_posts/` named `YYYY-MM-DD-some-title.md`:
 
